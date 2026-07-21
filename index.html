@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>State of Veterans</title>
+    <link rel="icon" type="image/png" href="images/Official Logo.png" />
+    <link rel="stylesheet" href="styles.1.css" />
+</head>
+<body>
+
+<!-- Article Preview Modal -->
+<dialog id="articleDialogue" class="menu-dialogue" style="max-width: 600px;">
+    <div class="dialogue-header">
+        <h3 id="articleModalTitle">Article Title</h3>
+        <button id="closeArticleBtn" class="close-btn" aria-label="Close article">&times;</button>
+    </div>
+    <hr>
+    <div id="articleModalBody">
+        <!-- Modal Image Container -->
+        <img id="articleModalImg" src="" alt="" style="width: 100%; max-height: 350px; object-fit: contain; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 1rem; display: none;" />
+        
+        <p id="articleModalContent"></p>
+        <p id="articleModalMeta" class="meta" style="margin-top: 1rem; color: #666;"></p>
+    </div>
+</dialog>
+
+<!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="container nav-container">
+            
+            <!-- Logo & Title Linked to Home (#hero) -->
+            <a href="#hero" class="logo">
+                <img src="images/Official Logo.png" alt="State of Veterans Logo" class="sov-logo" />
+                <div class="logo-text">
+                    <span class="logo-top">STATE OF</span>
+                    <span class="logo-bottom">VETERANS</span>
+                </div>
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="#sov-news">SoV News</a></li>
+                    <li><a href="#what-motivates-us">What Motivates Us</a></li>
+                    <li><a href="#who-we-are">Who We Are</a></li>
+                    <li><a href="#programs-initiatives">Programs & Initiatives</a></li>
+                    <li><a href="#events">Upcoming Events</a></li>
+                    <li><a href="#resources">Key Resources</a></li>
+                    <li><a href="data-sets.html">Data Sets</a></li>
+                    <li><a href="take-the-survey.html">Take The Survey</a></li>
+                    <li><a href="partners-sponsors.html">Partners & Sponsors</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <main>
+        
+<rssapp-ticker id="m6ogmCiCEUiZmgSt"></rssapp-ticker><script src="https://widget.rss.app/v1/ticker.js" type="text/javascript" async></script>   
+        
+<!-- Hero Section -->
+
+<section id="hero" class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <a href="#branch-banner-section" id="heroLogoLink" title="Click to view military branches">
+            <img src="images/Official Logo.png"
+             alt="State of Veterans logo"
+             class="hero-logo">
+            </a>
+
+            <h1>Advancing research, partnerships, and public engagement to elevate veteran voices and strengthen civic understanding.</h1>
+            <p>
+                State of Veterans is a hub for data related to and serving active duty and veterans. Our goal is to tell the stories of those who served so that we may better serve them.
+            </p>
+            <div class="hero-actions">
+                <a href="#what-motivates-us" class="btn btn-red">Learn More</a>
+                <a href="#contact" class="btn btn-white-blue">Get Involved</a>
+                <a href="https://www.veteranscrisisline.net/get-help-now/chat/" class="btn btn-blue" target="_blank" rel="noopener noreferrer">Crisis Support</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Military Branches Banner Section -->
+<section id="branch-banner-section" class="branch-banner-section" style="background-color: #ffffff; padding: 2.5rem 1rem; text-align: center; border-bottom: 1px solid #e0e0e0;">
+  <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+    <p style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: #666; margin: 0; font-weight: 600;">
+      Honoring All Branches of Service | Click a logo for the latest news from each branch website.
+    </p>
+
+    <!-- Interactive Image Map Wrapper -->
+    <div class="branch-photo-map">
+      <img src="Images/all-branch-banner.png" 
+           alt="U.S. Military Branch Seals" 
+           class="branch-full-image" />
+
+      <!-- Air Force -->
+      <a href="https://www.af.mil/News/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot air-force" 
+         aria-label="Air Force News"></a>
+
+      <!-- Navy -->
+      <a href="https://www.navy.mil/Press-Office/News-Stories/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot navy" 
+         aria-label="Navy News"></a>
+
+      <!-- Space Force -->
+      <a href="https://www.spaceforce.mil/news/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot space-force" 
+         aria-label="Space Force News"></a>
+
+      <!-- Army -->
+      <a href="https://www.army.mil/news" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot army" 
+         aria-label="Army News"></a>
+
+      <!-- Marines -->
+      <a href="https://www.marines.mil/News/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot marines" 
+         aria-label="Marines News"></a>
+
+      <!-- Coast Guard -->
+      <a href="https://www.news.uscg.mil/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="branch-hotspot coast-guard" 
+         aria-label="Coast Guard News"></a>
+    </div>
+  </div>
+</section>
+
+<!-- SoV News Section -->
+<section id="sov-news" class="section section-alt">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+                <h2 style="margin: 0;">SoV News</h2>
+                <p class="section-intro" style="margin: 0.25rem 0 0 0;">Latest updates, announcements, and stories from State of Veterans.</p>
+            </div>
+
+            <!-- News Pagination / Carousel Controls -->
+            <div id="news-pagination-controls" style="display: none; align-items: center; gap: 0.75rem;">
+                <span id="news-page-indicator" style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">Page 1</span>
+                <button id="prevNewsBtn" class="btn btn-outline" style="color: var(--text-main); border-color: #ccc; padding: 0.4rem 0.8rem; font-size: 1.1rem; line-height: 1; cursor: pointer;" aria-label="Previous news articles">&lsaquo;</button>
+                <button id="nextNewsBtn" class="btn btn-outline" style="color: var(--text-main); border-color: #ccc; padding: 0.4rem 0.8rem; font-size: 1.1rem; line-height: 1; cursor: pointer;" aria-label="Next news articles">&rsaquo;</button>
+            </div>
+        </div>
+
+        <!-- Dynamic Grid where Google Sheet content loads -->
+        <div class="cards-grid" id="sheet-news-grid">
+            <p style="color: #666;">Loading latest news...</p>
+        </div>
+    </div>
+</section>
+
+<!-- Live Google Sheet CSV feed script with 3-Item Pagination -->
+<script>
+  const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRl8WcpA-L2Et11UKeBOVJFZlWYgelqXS0JtFP8R6-2brHJBRxGZc7J1FlD3JUQKnDFcPC8-J0FJjbw/pub?output=csv';
+
+  let allNewsArticles = [];
+  let currentNewsPage = 0;
+  const itemsPerPage = 3;
+
+  function parseCSV(text) {
+    let p = '', c = '', r = [];
+    let q = false;
+    let row = [''];
+    for (let i = 0; i < text.length; i++) {
+      c = text[i];
+      p = text[i - 1];
+      if (c === '"') {
+        if (q && text[i + 1] === '"') {
+          row[row.length - 1] += '"';
+          i++;
+        } else {
+          q = !q;
+        }
+      } else if (c === ',' && !q) {
+        row.push('');
+      } else if ((c === '\r' || c === '\n') && !q) {
+        if (p === '\r' && c === '\n') {
+        } else {
+          r.push(row);
+          row = [''];
+        }
+      } else {
+        row[row.length - 1] += c;
+      }
+    }
+    if (row.length > 1 || row[0] !== '') {
+      r.push(row);
+    }
+    return r;
+  }
+
+  // Robust date parsing function to handle multiple formats from Google Sheets
+  function parseSheetDate(dateStr) {
+    if (!dateStr) return 0;
+    const cleanStr = dateStr.trim();
+
+    let parsed = new Date(cleanStr);
+    if (!isNaN(parsed.getTime())) {
+      return parsed.getTime();
+    }
+
+    const parts = cleanStr.split(/[\/\-\.]/);
+    if (parts.length === 3) {
+      let month = parseInt(parts[0], 10) - 1;
+      let day = parseInt(parts[1], 10);
+      let year = parseInt(parts[2], 10);
+
+      if (year < 100) year += 2000;
+
+      parsed = new Date(year, month, day);
+      if (!isNaN(parsed.getTime())) {
+        return parsed.getTime();
+      }
+    }
+
+    return 0;
+  }
+
+  // Render 3 news articles based on current page index
+  function renderNewsPage() {
+    const grid = document.getElementById('sheet-news-grid');
+    const prevBtn = document.getElementById('prevNewsBtn');
+    const nextBtn = document.getElementById('nextNewsBtn');
+    const pageIndicator = document.getElementById('news-page-indicator');
+    const controls = document.getElementById('news-pagination-controls');
+
+    if (!allNewsArticles.length) {
+      grid.innerHTML = '<p>No news items found.</p>';
+      if (controls) controls.style.display = 'none';
+      return;
+    }
+
+    const totalPages = Math.ceil(allNewsArticles.length / itemsPerPage);
+
+    // Show controls if there are more than 3 articles total
+    if (controls) {
+      controls.style.display = totalPages > 1 ? 'flex' : 'none';
+    }
+
+    // Calculate current slice
+    const startIdx = currentNewsPage * itemsPerPage;
+    const pageArticles = allNewsArticles.slice(startIdx, startIdx + itemsPerPage);
+
+    let htmlOutput = '';
+
+    pageArticles.forEach((cols) => {
+      const title = cols[0] ? cols[0].trim() : '';
+      const summary = cols[1] ? cols[1].trim() : '';
+      const imgUrl = cols[2] ? cols[2].trim() : '';
+      const date = cols[3] ? cols[3].trim() : '';
+
+      const truncatedSummary = summary.length > 120 ? summary.substring(0, 120) + '...' : summary;
+
+      htmlOutput += `
+        <article class="card">
+          ${imgUrl ? `<img src="${imgUrl}" alt="${title}" class="news-card-img">` : ''}
+          <h3>${title}</h3>
+          <p>${truncatedSummary}</p>
+          ${date ? `<p class="meta">Date: ${date}</p>` : ''}
+          <button class="btn btn-primary read-more-btn" 
+                  style="margin-top: 1rem; padding: 0.4rem 0.9rem; font-size: 0.85rem;"
+                  data-title="${encodeURIComponent(title)}" 
+                  data-full="${encodeURIComponent(summary)}"
+                  data-date="${encodeURIComponent(date)}"
+                  data-img="${encodeURIComponent(imgUrl)}">
+            Read More
+          </button>
+        </article>
+      `;
+    });
+
+    grid.innerHTML = htmlOutput;
+    setupArticleModal(); // Attach modal click listeners for visible cards
+
+    // Update pagination indicator and button states
+    if (pageIndicator) {
+      pageIndicator.textContent = `Page ${currentNewsPage + 1} of ${totalPages}`;
+    }
+
+    if (prevBtn) prevBtn.disabled = currentNewsPage === 0;
+    if (nextBtn) nextBtn.disabled = currentNewsPage >= totalPages - 1;
+  }
+
+// Fetch fresh sheet data bypassing browser & CDN caches
+  fetch(sheetCsvUrl, { 
+    cache: 'reload',
+    headers: {
+      'Pragma': 'no-cache',
+      'Cache-Control': 'no-cache'
+    }
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Failed to fetch Google Sheet CSV');
+    return response.text();
+  })
+  .then(csvData => {
+    const parsedRows = parseCSV(csvData);
+    let dataRows = parsedRows.slice(1);
+
+    // Filter out empty rows or rows missing a title
+    dataRows = dataRows.filter(cols => cols.length >= 1 && cols[0] && cols[0].trim() !== '');
+
+    // Sort rows by Date (Most Recent First)
+    dataRows.sort((a, b) => {
+      const timeA = parseSheetDate(a[3]);
+      const timeB = parseSheetDate(b[3]);
+
+      return timeB - timeA;
+    });
+
+    allNewsArticles = dataRows;
+    currentNewsPage = 0;
+    renderNewsPage();
+
+    // Attach Event Listeners to Pagination Arrows
+    const prevBtn = document.getElementById('prevNewsBtn');
+    const nextBtn = document.getElementById('nextNewsBtn');
+
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        if (currentNewsPage > 0) {
+          currentNewsPage--;
+          renderNewsPage();
+        }
+      };
+    }
+
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        const totalPages = Math.ceil(allNewsArticles.length / itemsPerPage);
+        if (currentNewsPage < totalPages - 1) {
+          currentNewsPage++;
+          renderNewsPage();
+        }
+      };
+    }
+  })
+  .catch(err => {
+    console.error('Error fetching sheet:', err);
+    document.getElementById('sheet-news-grid').innerHTML = '<p>Unable to load news updates at this time.</p>';
+  });
+
+  // Function to initialize article modal event handlers
+  function setupArticleModal() {
+    const dialog = document.getElementById('articleDialogue');
+    const titleEl = document.getElementById('articleModalTitle');
+    const contentEl = document.getElementById('articleModalContent');
+    const metaEl = document.getElementById('articleModalMeta');
+    const imgEl = document.getElementById('articleModalImg');
+    const closeBtn = document.getElementById('closeArticleBtn');
+
+    document.querySelectorAll('.read-more-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        titleEl.textContent = decodeURIComponent(button.getAttribute('data-title'));
+        contentEl.textContent = decodeURIComponent(button.getAttribute('data-full'));
+        
+        const dateStr = decodeURIComponent(button.getAttribute('data-date'));
+        metaEl.textContent = dateStr ? `Date: ${dateStr}` : '';
+
+        const imgUrl = decodeURIComponent(button.getAttribute('data-img'));
+        if (imgUrl && imgUrl.trim() !== '') {
+          imgEl.src = imgUrl;
+          imgEl.alt = titleEl.textContent;
+          imgEl.style.display = 'block';
+        } else {
+          imgEl.style.display = 'none';
+          imgEl.src = '';
+        }
+
+        dialog.showModal();
+      });
+    });
+
+    if (closeBtn && dialog) {
+      closeBtn.addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (e) => {
+        const rect = dialog.getBoundingClientRect();
+        if (
+          e.clientX < rect.left ||
+          e.clientX > rect.right ||
+          e.clientY < rect.top ||
+          e.clientY > rect.bottom
+        ) {
+          dialog.close();
+        }
+      });
+    }
+  }
+</script>
+
+<!-- About Section -->
+        <section id="what-motivates-us" class="section">
+            <div class="container two-column">
+                <div>
+                    <h2>What Motivates Us</h2>
+                        <p><span class="underline-title">Our Mission:</span> The State of Veterans initiative advances research, public engagement, and academic collaboration focused on veterans, military service, and democratic society. Through scholarship, mentorship, and community partnerships, we seek to deepen understanding of how veterans shape and are shaped by American political and civic institutions while developing the next generation of veteran-centered scholars and leaders.</p>
+                        <p><span class="underline-title">The Value We Add:</span> We support veteran and non-veteran scholars who seek to better understand the political, social, and policy experiences of veterans, how military service shapes civic life, and how democratic institutions impact the lives of those who have served.</p>
+                        <p><span class="underline-title">How We Transmit Value:</span> We leverage our position in the Universities to design, conduct, and share research that advances knowledge about veterans, public policy, democratic institutions, and civic participation. Through research, mentorship, public engagement, and collaboration, we work to strengthen both scholarly understanding and public dialogue surrounding the state of veterans in America.</p>
+
+                    <p><strong><em>Our goals include:</em></strong></p>
+                    <ul class="checklist">
+                        <li>The formation of a yearly, unified survey data set.</li>
+                        <li>Connecting academic research institutions and veteran advocacy groups.</li>
+                        <li>Conduct and publish research that gets to the heart of veteran matters.</li>
+                        <li>Elevating veteran perspectives in research and public discussion.</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Who We Serve</h3>
+                    <p>We welcome:</p>
+                    <ul>
+                        <li>Veterans of all branches and eras</li>
+                        <li>Active duty, National Guard, and Reserve</li>
+                        <li>Student veterans (all branches and eras)</li>
+                        <li>Universities, Research Institutions and veteran advocacy groups</li>
+                        <li>Government agencies (i.e. Veteran Administration)</li>
+                        <li>Anyone who works to support veterans</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+<!--the team section-->
+        <section id="who-we-are" class="section section-alt">
+                <div class="container">
+                    <h2>Who We Are</h2>
+                    <p class="section-intro">
+                        Meet the State of Veterans team! For more info please check out our testimonials by clicking the individual photo of our team members.
+                    </p>
+
+                <div class="team-image-wrapper">
+                    <div class="team-photo-map">
+                    <img src="images/Team Photos.png"
+                        alt="State of Veterans team members and roles"
+                        class="team-full-image">
+
+                <!-- Page 1 people -->
+            <a href="testimonial-page-1.html#pedraza"
+            class="team-hotspot pedraza"
+            aria-label="Read Dr. Francisco Pedraza's testimony"></a>
+
+            <a href="testimonial-page-1.html#justice"
+            class="team-hotspot justice"
+            aria-label="Read Dale Justice Jr.'s testimony"></a>
+
+            <a href="testimonial-page-1.html#mons"
+            class="team-hotspot mons"
+            aria-label="Read Frank Mons's testimony"></a>
+
+            <!-- Page 2 people -->
+            <a href="testimonial-page-2.html#shirvin"
+            class="team-hotspot shirvin"
+            aria-label="Read Shirvin Zeinalzadeh's testimony"></a>
+
+            <a href="testimonial-page-2.html#jack"
+            class="team-hotspot jack"
+            aria-label="Read Jack Hinrichs's testimony"></a>
+
+            <a href="testimonial-page-2.html#alexia"
+            class="team-hotspot alexia"
+            aria-label="Read Alexia Jones's testimony"></a>
+        </div>
+        </div>
+        </div>  
+        </section>
+
+        <!-- Programs Section -->
+        <section id="programs-initiatives" class="section">
+            <div class="container">
+                <h2>Programs & Initiatives</h2>
+                <p class="section-intro">
+                    At The State of Veterans in Democracy Research Program we’re building a set of programs designed around connection, mentorship, and
+                    academic success.
+                </p>
+
+                <div class="cards-grid">
+                    <article class="card">
+                        <h3>SoV Academic Research</h3>
+                        <p>
+                            Advancing innovative research on veterans, democracy, public policy, and institutional trust while increasing interdisciplinary research productivity
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Data Repository</h3>
+                        <p>
+                            Building a centralized national archive for veteran-focused datasets, surveys, policy research, and scholarly collaboration to support future research and public understanding.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>SoV Advocacy</h3>
+                        <p>
+                           Bridging academic research with real-world impact through community partnerships, outreach initiatives, and philanthropic support that strengthen veteran services.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>SoV Public Facing</h3>
+                        <p>
+                           Transforming research into public engagement through reports, media, storytelling, and educational programming that shape conversations about veterans.
+                        </p>   
+                    </article>
+
+                   <article class="card">
+                        <h3>Undergrad Research & Writing Symposium</h3>
+                        <p>
+                           Creating opportunities for undergraduate students to participate in research, strengthen academic writing, collaborate with faculty mentors, and present original scholarship through a dedicated symposium.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Writing Lab</h3>
+                        <p>
+                           Providing veterans and military-connected students with mentorship, writing support, and professional development while teaching the “invisible curriculum” of higher education.
+                        </p>
+                    </article>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="section">
+            <div class="container">
+                <h2>Upcoming Events</h2>
+                <p class="section-intro">
+                    Here’s a preview of the kinds of events we host.
+                </p>
+
+                <div class="cards-grid">
+                    <article class="card">
+                        <h3>Veterans Day Webinar</h3>
+                        <p>
+                            Official State of Veterans Launch Day!
+                        </p>
+                        <p>
+                            All are welcome to attend!
+                        </p>
+                        <p class="meta">Date: 11/11/2026 • Time: TBD • Location: TBD </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Veteran Voices Panel</h3>
+                        <p>
+                            Student veterans and faculty share their experiences and discuss
+                            the transition from service to campus life.
+                        </p>
+                        <p class="meta">Date: TBD • Time: TBD • Location: TBD</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Writing Lab</h3>
+                        <p>
+                            Open opportunity for all undergrad and graduate students alike to research and write.
+                        </p>
+                        <p class="meta">Date: TBD • Time: TBD • Location: TBD</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>TBD</h3>
+                        <p>
+                            Open for future events.
+                        </p>
+                        <p>
+                            Future events Here
+                        </p>
+                        <p class="meta">Date: TBD • Time: TBD • Location: TBD</p>
+                    </article>
+
+                   <article class="card">
+                        <h3>TBD</h3>
+                        <p>
+                            Open for future events.
+                        </p>
+                        <p>
+                            Future events Here
+                        </p>
+                        <p class="meta">Date: TBD • Time: TBD • Location: TBD</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>TBD</h3>
+                        <p>
+                            Open for future events.
+                        </p>
+                        <p>
+                            Future events Here
+                        </p>
+                        <p class="meta">Date: TBD • Time: TBD • Location: TBD</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section">
+            <div class="container">
+                <h2>Key Resources</h2>
+                <p class="section-intro">
+                    These are example resource blocks you can later link to official pages
+                    and partner organizations.
+                </p>
+
+                <div class="cards-grid">
+                    <article class="card">
+                        <h3>Campus Support</h3>
+                        <ul class="link-list">
+                            <li><span>Veterans Center / Military Support Office</span></li>
+                            <li><span>Counseling & Wellness Services</span></li>
+                            <li><span>Disability & Accessibility Resources</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Academic & Career</h3>
+                        <ul class="link-list">
+                            <li><span>Academic advising for veterans</span></li>
+                            <li><span>Career & internship services</span></li>
+                            <li><span>Writing & tutoring centers</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Benefits & Community</h3>
+                        <ul class="link-list">
+                            <li><span>GI Bill & education benefits guidance</span></li>
+                            <li><span>Local VSOs and community partners</span></li>
+                            <li><span>Peer support and affinity groups</span></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+<!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container two-column">
+                <div>
+                    <h2>Contact & Get Involved</h2>
+                    <p>
+                        Ready to connect, collaborate, or learn more? Reach out and let us know
+                        how you’d like to be involved with State of Veterans.
+                    </p>
+                    
+                </div>
+
+                <div>
+                    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                        <input type="hidden" name="access_key" value="e1aa1eb8-42da-4af3-92fb-3c3a59216e31">
+                        <input type="hidden" name="subject" value="New Contact Form Submission">
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                        <input type="checkbox" name="botcheck" style="display: none;">
+
+                        <div class="form-group">
+                            <label for="name">Name*</label>
+                            <input type="text" id="name" name="name" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" id="email" name="email" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="affiliation">Affiliation</label>
+                            <select id="affiliation" name="affiliation">
+                                <option value="">Select one</option>
+                                <option value="student_veteran">Student Veteran</option>
+                                <option value="military_connected">Military-Connected Student</option>
+                                <option value="faculty_staff">Faculty / Staff</option>
+                                <option value="community_partner">Community Partner</option>
+                                <option value="ally">Ally / Interested Supporter</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Crisis Line Banner -->
+            <div class="container" style="margin-top: 3rem; text-align: center;">
+                <a
+                  id="crisisImageLink"
+                  href="https://www.veteranscrisisline.net/get-help-now/chat/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Veterans Crisis Line"
+                  class="crisis-image-link"
+                >
+                  <img
+                    id="crisisRotator"
+                    src="images/Spread the Word_Email Signatures.png"
+                    alt="Veterans Crisis Line"
+                    class="crisis-image-only"
+                    style="max-width: 100%; height: auto;"
+                  >
+                </a>
+            </div>
+        </section>
+
+        <!-- Thank You Modal -->
+<dialog id="thankYouDialogue" class="menu-dialogue" style="max-width: 500px; text-align: center;">
+    <div class="dialogue-header" style="justify-content: flex-end;">
+        <button id="closeThankYouBtn" class="close-btn" aria-label="Close dialog">&times;</button>
+    </div>
+    <div style="padding: 1rem 0;">
+        <h2 style="color: var(--primary); margin-top: 0;">Thank You For Your Service!</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #333;">
+            To all active duty members, veterans, reserves, and military families: State of Veterans honors and deeply appreciates your service, sacrifice, and dedication.
+        </p>
+        <button id="modalCloseActionBtn" class="btn btn-primary" style="margin-top: 1rem;">
+            Explore Branches & News
+        </button>
+    </div>
+</dialog>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; <span id="year"></span> State of Veterans. All rights reserved.</p>
+            <p class="footer-note">
+                This is a student and faculty, multi-university joint initiative.
+            </p>
+            <p class="footer-signature">Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.</p>
+        </div>
+    </footer>
+
+<!-- Floating Navigation Menu & Back to Top Group -->
+    <div class="floating-controls">
+        <button id="floatingMenuBtn" class="floating-btn menu-btn">Menu</button>
+        <a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">Back to Top</a>
+    </div>
+
+    <!-- Menu Dialogue Box (Modal) -->
+    <dialog id="menuDialogue" class="menu-dialogue">
+        <div class="dialogue-header">
+            <h3>Navigation Menu</h3>
+            <button id="closeDialogueBtn" class="close-btn" aria-label="Close menu">&times;</button>
+        </div>
+        <hr>
+        <nav class="dialogue-nav">
+            <ul>
+                <li><a href="#sov-news">SoV News</a></li>
+                <li><a href="#what-motivates-us">What Motivates Us</a></li>
+                <li><a href="#who-we-are">Who We Are</a></li>
+                <li><a href="#programs-initiatives">Programs & Initiatives</a></li>
+                <li><a href="#events">Upcoming Events</a></li>
+                <li><a href="#resources">Key Resources</a></li>
+                <li><a href="data-sets.html">Data Sets</a></li>
+                <li><a href="take-the-survey.html">Take The Survey</a></li>
+                <li><a href="partners-sponsors.html">Partners & Sponsors</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </dialog>
+
+    <!-- JavaScript Reference -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.
+ * Copyright (c) 2026 David Huddleston. All rights reserved.
+ * Lead Website Development | Full-Stack Web Developer
+ * Unauthorized copying, modification, or distribution is strictly prohibited.
+ -->   
