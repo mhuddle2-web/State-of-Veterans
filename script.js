@@ -155,33 +155,39 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
 }
 
 // ==========================================
-//  LOGOS -> THANK YOU DIALOGUE & AUDIO CONTROLLER
+//  HERO MAIN LOGO -> THANK YOU DIALOGUE & CONTROLLED AUDIO
 // ==========================================
-const logoTriggers = document.querySelectorAll(".trigger-thank-you");
+const heroLogoLink = document.getElementById("heroLogoLink");
 const thankYouDialogue = document.getElementById("thankYouDialogue");
 const closeThankYouBtn = document.getElementById("closeThankYouBtn");
 const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
 const patrioticAudio = document.getElementById("patrioticAudio");
 
-if (thankYouDialogue) {
-  // Play song and display dialog when any home logo is clicked
-  logoTriggers.forEach((logo) => {
-    logo.addEventListener("click", (e) => {
-      e.preventDefault();
+if (thankYouDialogue && heroLogoLink) {
+  // Trigger exclusively on hero main logo click or tap
+  heroLogoLink.addEventListener("click", (e) => {
+    e.preventDefault();
 
-      thankYouDialogue.showModal();
+    thankYouDialogue.showModal();
 
-      if (patrioticAudio) {
-        patrioticAudio.volume = 0.5;
-        patrioticAudio.currentTime = 0;
-        patrioticAudio.play().catch((err) => {
-          console.warn("Audio play error:", err);
+    if (patrioticAudio) {
+      // Set comfortable volume to avoid ear-shattering levels (0.2 = 20% volume)
+      patrioticAudio.volume = 0.2; 
+      patrioticAudio.currentTime = 0;
+      
+      // Reload audio context to prepare smooth playback on live servers
+      patrioticAudio.load();
+
+      const playPromise = patrioticAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Audio blocked by browser or file path error:", err);
         });
       }
-    });
+    }
   });
 
-  // Reusable function to close dialog and immediately stop/reset audio
+  // Reusable function to close dialog and immediately stop & reset audio
   const closeThankYouModal = () => {
     if (thankYouDialogue.open) {
       thankYouDialogue.close();
@@ -195,7 +201,7 @@ if (thankYouDialogue) {
   if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
   if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
 
-  // Stop audio if closed via backdrop click
+  // Stop audio if closed via backdrop overlay click
   thankYouDialogue.addEventListener("click", (e) => {
     const rect = thankYouDialogue.getBoundingClientRect();
     if (
