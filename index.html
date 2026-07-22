@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<!-- Patriotic Theme Audio Player -->
+<audio id="patrioticAudio" src="audio/patriotic-theme.mp3" preload="auto"></audio>
+
 <!-- Article Preview Modal -->
 <dialog id="articleDialogue" class="menu-dialogue" style="max-width: 600px;">
     <div class="dialogue-header">
@@ -64,11 +67,10 @@
 <rssapp-ticker id="m6ogmCiCEUiZmgSt"></rssapp-ticker><script src="https://widget.rss.app/v1/ticker.js" type="text/javascript" async></script>   
         
 <!-- Hero Section -->
-
 <section id="hero" class="hero">
     <div class="container hero-content">
         <div class="hero-text">
-            <a href="#branch-banner-section" id="heroLogoLink" title="Click to view military branches">
+            <a href="#" id="heroLogoLink" title="Click for thank you message">
             <img src="images/Official Logo.png"
              alt="State of Veterans logo"
              class="hero-logo">
@@ -85,64 +87,6 @@
             </div>
         </div>
     </div>
-</section>
-
-<!-- Military Branches Banner Section -->
-<section id="branch-banner-section" class="branch-banner-section" style="background-color: #ffffff; padding: 2.5rem 1rem; text-align: center; border-bottom: 1px solid #e0e0e0;">
-  <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-    <p style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: #666; margin: 0; font-weight: 600;">
-      Honoring All Branches of Service | Click a logo for the latest news from each branch website.
-    </p>
-
-    <!-- Interactive Image Map Wrapper -->
-    <div class="branch-photo-map">
-      <img src="images/all-branch-banner.png" 
-           alt="U.S. Military Branch Seals" 
-           class="branch-full-image" />
-
-      <!-- Air Force -->
-      <a href="https://www.af.mil/News/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot air-force" 
-         aria-label="Air Force News"></a>
-
-      <!-- Navy -->
-      <a href="https://www.navy.mil/Press-Office/News-Stories/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot navy" 
-         aria-label="Navy News"></a>
-
-      <!-- Space Force -->
-      <a href="https://www.spaceforce.mil/news/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot space-force" 
-         aria-label="Space Force News"></a>
-
-      <!-- Army -->
-      <a href="https://www.army.mil/news" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot army" 
-         aria-label="Army News"></a>
-
-      <!-- Marines -->
-      <a href="https://www.marines.mil/News/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot marines" 
-         aria-label="Marines News"></a>
-
-      <!-- Coast Guard -->
-      <a href="https://www.news.uscg.mil/" 
-         target="_blank" 
-         rel="noopener noreferrer" 
-         class="branch-hotspot coast-guard" 
-         aria-label="Coast Guard News"></a>
-    </div>
-  </div>
 </section>
 
 <!-- SoV News Section -->
@@ -209,7 +153,6 @@
     return r;
   }
 
-  // Robust date parsing function to handle multiple formats from Google Sheets
   function parseSheetDate(dateStr) {
     if (!dateStr) return 0;
     const cleanStr = dateStr.trim();
@@ -236,7 +179,6 @@
     return 0;
   }
 
-  // Render 3 news articles based on current page index
   function renderNewsPage() {
     const grid = document.getElementById('sheet-news-grid');
     const prevBtn = document.getElementById('prevNewsBtn');
@@ -252,12 +194,10 @@
 
     const totalPages = Math.ceil(allNewsArticles.length / itemsPerPage);
 
-    // Show controls if there are more than 3 articles total
     if (controls) {
       controls.style.display = totalPages > 1 ? 'flex' : 'none';
     }
 
-    // Calculate current slice
     const startIdx = currentNewsPage * itemsPerPage;
     const pageArticles = allNewsArticles.slice(startIdx, startIdx + itemsPerPage);
 
@@ -290,9 +230,8 @@
     });
 
     grid.innerHTML = htmlOutput;
-    setupArticleModal(); // Attach modal click listeners for visible cards
+    setupArticleModal();
 
-    // Update pagination indicator and button states
     if (pageIndicator) {
       pageIndicator.textContent = `Page ${currentNewsPage + 1} of ${totalPages}`;
     }
@@ -301,7 +240,6 @@
     if (nextBtn) nextBtn.disabled = currentNewsPage >= totalPages - 1;
   }
 
-// Fetch fresh sheet data bypassing browser & CDN caches
   fetch(sheetCsvUrl, { 
     cache: 'reload',
     headers: {
@@ -317,10 +255,8 @@
     const parsedRows = parseCSV(csvData);
     let dataRows = parsedRows.slice(1);
 
-    // Filter out empty rows or rows missing a title
     dataRows = dataRows.filter(cols => cols.length >= 1 && cols[0] && cols[0].trim() !== '');
 
-    // Sort rows by Date (Most Recent First)
     dataRows.sort((a, b) => {
       const timeA = parseSheetDate(a[3]);
       const timeB = parseSheetDate(b[3]);
@@ -332,7 +268,6 @@
     currentNewsPage = 0;
     renderNewsPage();
 
-    // Attach Event Listeners to Pagination Arrows
     const prevBtn = document.getElementById('prevNewsBtn');
     const nextBtn = document.getElementById('nextNewsBtn');
 
@@ -360,7 +295,6 @@
     document.getElementById('sheet-news-grid').innerHTML = '<p>Unable to load news updates at this time.</p>';
   });
 
-  // Function to initialize article modal event handlers
   function setupArticleModal() {
     const dialog = document.getElementById('articleDialogue');
     const titleEl = document.getElementById('articleModalTitle');
@@ -441,7 +375,7 @@
             </div>
         </section>
 
-<!--the team section-->
+<!-- the team section -->
         <section id="who-we-are" class="section section-alt">
                 <div class="container">
                     <h2>Who We Are</h2>
@@ -455,7 +389,7 @@
                         alt="State of Veterans team members and roles"
                         class="team-full-image">
 
-                <!-- Page 1 people -->
+            <!-- Page 1 people -->
             <a href="testimonial-page-1.html#pedraza"
             class="team-hotspot pedraza"
             aria-label="Read Dr. Francisco Pedraza's testimony"></a>
@@ -490,8 +424,7 @@
             <div class="container">
                 <h2>Programs & Initiatives</h2>
                 <p class="section-intro">
-                    At The State of Veterans in Democracy Research Program we’re building a set of programs designed around connection, mentorship, and
-                    academic success.
+                    At The State of Veterans in Democracy Research Program we’re building a set of programs designed around connection, mentorship, and academic success.
                 </p>
 
                 <div class="cards-grid">
@@ -536,8 +469,6 @@
                            Providing veterans and military-connected students with mentorship, writing support, and professional development while teaching the “invisible curriculum” of higher education.
                         </p>
                     </article>
-
-
                 </div>
             </div>
         </section>
@@ -664,7 +595,6 @@
                         Ready to connect, collaborate, or learn more? Reach out and let us know
                         how you’d like to be involved with State of Veterans.
                     </p>
-                    
                 </div>
 
                 <div>
@@ -738,7 +668,7 @@
             To all active duty members, veterans, reserves, and military families: State of Veterans honors and deeply appreciates your service, sacrifice, and dedication.
         </p>
         <button id="modalCloseActionBtn" class="btn btn-primary" style="margin-top: 1rem;">
-            Explore Branches & News
+            Close
         </button>
     </div>
 </dialog>
