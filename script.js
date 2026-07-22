@@ -155,31 +155,39 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
 }
 
 // ==========================================
-//  HERO LOGO -> BRANCH BANNER & THANK YOU DIALOGUE
+//  HERO LOGO -> THANK YOU DIALOGUE & PATRIOTIC AUDIO
 // ==========================================
 const heroLogoLink = document.getElementById("heroLogoLink");
 const thankYouDialogue = document.getElementById("thankYouDialogue");
 const closeThankYouBtn = document.getElementById("closeThankYouBtn");
 const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
+const patrioticAudio = document.getElementById("patrioticAudio");
 
 if (heroLogoLink && thankYouDialogue) {
   heroLogoLink.addEventListener("click", (e) => {
     e.preventDefault();
 
-    // 1. Smooth scroll to the branch banner section
-    const targetEl = document.getElementById("branch-banner-section");
-    if (targetEl) {
-      targetEl.scrollIntoView({ behavior: "smooth" });
-    }
+    // 1. Open dialogue box
+    thankYouDialogue.showModal();
 
-    // 2. Open the thank you popup modal after scroll starts
-    setTimeout(() => {
-      thankYouDialogue.showModal();
-    }, 400);
+    // 2. Play Audio at 50% Volume
+    if (patrioticAudio) {
+      patrioticAudio.volume = 0.5; // Set volume to 50%
+      patrioticAudio.currentTime = 0; // Play from beginning
+      patrioticAudio.play().catch((err) => {
+        console.warn("Audio play error:", err);
+      });
+    }
   });
 
-  // Close handlers
-  const closeThankYouModal = () => thankYouDialogue.close();
+  // Close handler function that stops the audio
+  const closeThankYouModal = () => {
+    thankYouDialogue.close();
+    if (patrioticAudio) {
+      patrioticAudio.pause();
+      patrioticAudio.currentTime = 0;
+    }
+  };
 
   if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
   if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
@@ -193,11 +201,10 @@ if (heroLogoLink && thankYouDialogue) {
       e.clientY < rect.top ||
       e.clientY > rect.bottom
     ) {
-      thankYouDialogue.close();
+      closeThankYouModal();
     }
   });
 }
-
 // Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.
 /**
  * Copyright (c) 2026 David Huddleston. All rights reserved.
