@@ -156,27 +156,33 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
 }
 
 // ==========================================
-//  HERO MAIN LOGO -> THANK YOU DIALOGUE & CONTROLLED AUDIO
+// HERO LOGO EASTER EGG (FAILSAFE TRIGGER & AUDIO)
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-  const heroLogoLink = document.getElementById("heroLogoLink");
   const thankYouDialogue = document.getElementById("thankYouDialogue");
-  const closeThankYouBtn = document.getElementById("closeThankYouBtn");
-  const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
   const patrioticAudio = document.getElementById("patrioticAudio");
 
-  if (thankYouDialogue && heroLogoLink) {
-    heroLogoLink.addEventListener("click", (e) => {
+  // Global click handler to capture clicks directly on the hero logo or its image
+  document.addEventListener("click", (e) => {
+    const heroLink = e.target.closest("#heroLogoLink");
+
+    if (heroLink) {
       e.preventDefault();
       e.stopPropagation();
 
-      // Show Thank You Box
-      thankYouDialogue.showModal();
+      // 1. Open Dialogue Box
+      if (thankYouDialogue) {
+        if (typeof thankYouDialogue.showModal === "function") {
+          thankYouDialogue.showModal();
+        } else {
+          thankYouDialogue.setAttribute("open", "true");
+        }
+      }
 
-      // Play Audio safely without resetting context
+      // 2. Play Audio
       if (patrioticAudio) {
-        patrioticAudio.volume = 0.3; // 30% volume
-        patrioticAudio.currentTime = 0;
+        patrioticAudio.volume = 0.3; // Set safe volume
+        patrioticAudio.currentTime = 0; // Restart track
 
         const playPromise = patrioticAudio.play();
         if (playPromise !== undefined) {
@@ -185,21 +191,33 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
       }
-    });
+    }
+  });
 
-    const closeThankYouModal = () => {
-      if (thankYouDialogue.open) {
+  // Function to close box and stop music
+  const stopAudioAndClose = () => {
+    if (thankYouDialogue) {
+      if (typeof thankYouDialogue.close === "function") {
         thankYouDialogue.close();
+      } else {
+        thankYouDialogue.removeAttribute("open");
       }
-      if (patrioticAudio) {
-        patrioticAudio.pause();
-        patrioticAudio.currentTime = 0;
-      }
-    };
+    }
+    if (patrioticAudio) {
+      patrioticAudio.pause();
+      patrioticAudio.currentTime = 0;
+    }
+  };
 
-    if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
-    if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
+  // Close button listeners
+  const closeBtn1 = document.getElementById("closeThankYouBtn");
+  const closeBtn2 = document.getElementById("modalCloseActionBtn");
 
+  if (closeBtn1) closeBtn1.addEventListener("click", stopAudioAndClose);
+  if (closeBtn2) closeBtn2.addEventListener("click", stopAudioAndClose);
+
+  // Close when clicking outside the modal
+  if (thankYouDialogue) {
     thankYouDialogue.addEventListener("click", (e) => {
       const rect = thankYouDialogue.getBoundingClientRect();
       if (
@@ -208,12 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
         e.clientY < rect.top ||
         e.clientY > rect.bottom
       ) {
-        closeThankYouModal();
+        stopAudioAndClose();
       }
-    });
-
-    thankYouDialogue.addEventListener("cancel", () => {
-      closeThankYouModal();
     });
   }
 });
