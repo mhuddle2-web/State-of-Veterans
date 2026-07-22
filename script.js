@@ -234,7 +234,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.
 /**
- * Copyright (c) 2026 David Huddleston. All rights reserved.
- * Lead Website Development | Full-Stack Web Developer
- * Unauthorized copying, modification, or distribution is strictly prohibited.
  */
