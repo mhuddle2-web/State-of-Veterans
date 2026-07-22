@@ -14,11 +14,12 @@ if (navToggle && mainNav) {
     mainNav.classList.toggle("open");
   });
 
-  const navLinks = document.querySelectorAll("#mainNav a, .hero-actions a, .dialogue-nav a");
+  // FIXED: Explicitly exclude #heroLogoLink from smooth-scrolling interceptor
+  const navLinks = document.querySelectorAll("#mainNav a, .hero-actions a:not(#heroLogoLink), .dialogue-nav a");
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
+      if (!href || !href.startsWith("#") || href === "#") return;
 
       const id = href.slice(1);
       const el = document.getElementById(id);
@@ -127,7 +128,7 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
   dialogueLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       const href = link.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
+      if (!href || !href.startsWith("#") || href === "#") return;
 
       const id = href.slice(1);
       const el = document.getElementById(id);
@@ -157,68 +158,65 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
 // ==========================================
 //  HERO MAIN LOGO -> THANK YOU DIALOGUE & CONTROLLED AUDIO
 // ==========================================
-const heroLogoLink = document.getElementById("heroLogoLink");
-const thankYouDialogue = document.getElementById("thankYouDialogue");
-const closeThankYouBtn = document.getElementById("closeThankYouBtn");
-const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
-const patrioticAudio = document.getElementById("patrioticAudio");
+document.addEventListener("DOMContentLoaded", () => {
+  const heroLogoLink = document.getElementById("heroLogoLink");
+  const thankYouDialogue = document.getElementById("thankYouDialogue");
+  const closeThankYouBtn = document.getElementById("closeThankYouBtn");
+  const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
+  const patrioticAudio = document.getElementById("patrioticAudio");
 
-if (thankYouDialogue && heroLogoLink) {
-  // Trigger exclusively on hero main logo click or tap
-  heroLogoLink.addEventListener("click", (e) => {
-    e.preventDefault();
+  if (thankYouDialogue && heroLogoLink) {
+    heroLogoLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    thankYouDialogue.showModal();
+      // Show Thank You Box
+      thankYouDialogue.showModal();
 
-    if (patrioticAudio) {
-      // Set comfortable volume to avoid ear-shattering levels (0.2 = 20% volume)
-      patrioticAudio.volume = 0.2; 
-      patrioticAudio.currentTime = 0;
-      
-      // Reload audio context to prepare smooth playback on live servers
-      patrioticAudio.load();
+      // Play Audio safely without resetting context
+      if (patrioticAudio) {
+        patrioticAudio.volume = 0.3; // 30% volume
+        patrioticAudio.currentTime = 0;
 
-      const playPromise = patrioticAudio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Audio blocked by browser or file path error:", err);
-        });
+        const playPromise = patrioticAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.error("Audio playback error:", err);
+          });
+        }
       }
-    }
-  });
+    });
 
-  // Reusable function to close dialog and immediately stop & reset audio
-  const closeThankYouModal = () => {
-    if (thankYouDialogue.open) {
-      thankYouDialogue.close();
-    }
-    if (patrioticAudio) {
-      patrioticAudio.pause();
-      patrioticAudio.currentTime = 0;
-    }
-  };
+    const closeThankYouModal = () => {
+      if (thankYouDialogue.open) {
+        thankYouDialogue.close();
+      }
+      if (patrioticAudio) {
+        patrioticAudio.pause();
+        patrioticAudio.currentTime = 0;
+      }
+    };
 
-  if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
-  if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
+    if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
+    if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
 
-  // Stop audio if closed via backdrop overlay click
-  thankYouDialogue.addEventListener("click", (e) => {
-    const rect = thankYouDialogue.getBoundingClientRect();
-    if (
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top ||
-      e.clientY > rect.bottom
-    ) {
+    thankYouDialogue.addEventListener("click", (e) => {
+      const rect = thankYouDialogue.getBoundingClientRect();
+      if (
+        e.clientX < rect.left ||
+        e.clientX > rect.right ||
+        e.clientY < rect.top ||
+        e.clientY > rect.bottom
+      ) {
+        closeThankYouModal();
+      }
+    });
+
+    thankYouDialogue.addEventListener("cancel", () => {
       closeThankYouModal();
-    }
-  });
-
-  // Stop audio if closed via ESC key
-  thankYouDialogue.addEventListener("cancel", () => {
-    closeThankYouModal();
-  });
-}
+    });
+  }
+});
 
 // Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.
 /**
