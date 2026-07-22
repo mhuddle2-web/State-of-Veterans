@@ -155,34 +155,37 @@ if (menuDialogue && floatingMenuBtn && closeDialogueBtn) {
 }
 
 // ==========================================
-//  HERO LOGO -> THANK YOU DIALOGUE & PATRIOTIC AUDIO
+//  LOGOS -> THANK YOU DIALOGUE & AUDIO CONTROLLER
 // ==========================================
-const heroLogoLink = document.getElementById("heroLogoLink");
+const logoTriggers = document.querySelectorAll(".trigger-thank-you");
 const thankYouDialogue = document.getElementById("thankYouDialogue");
 const closeThankYouBtn = document.getElementById("closeThankYouBtn");
 const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
 const patrioticAudio = document.getElementById("patrioticAudio");
 
-if (heroLogoLink && thankYouDialogue) {
-  heroLogoLink.addEventListener("click", (e) => {
-    e.preventDefault();
+if (thankYouDialogue) {
+  // Play song and display dialog when any home logo is clicked
+  logoTriggers.forEach((logo) => {
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    // 1. Open dialogue box
-    thankYouDialogue.showModal();
+      thankYouDialogue.showModal();
 
-    // 2. Play Audio at 50% Volume
-    if (patrioticAudio) {
-      patrioticAudio.volume = 0.5; // Set volume to 50%
-      patrioticAudio.currentTime = 0; // Play from beginning
-      patrioticAudio.play().catch((err) => {
-        console.warn("Audio play error:", err);
-      });
-    }
+      if (patrioticAudio) {
+        patrioticAudio.volume = 0.5;
+        patrioticAudio.currentTime = 0;
+        patrioticAudio.play().catch((err) => {
+          console.warn("Audio play error:", err);
+        });
+      }
+    });
   });
 
-  // Close handler function that stops the audio
+  // Reusable function to close dialog and immediately stop/reset audio
   const closeThankYouModal = () => {
-    thankYouDialogue.close();
+    if (thankYouDialogue.open) {
+      thankYouDialogue.close();
+    }
     if (patrioticAudio) {
       patrioticAudio.pause();
       patrioticAudio.currentTime = 0;
@@ -192,7 +195,7 @@ if (heroLogoLink && thankYouDialogue) {
   if (closeThankYouBtn) closeThankYouBtn.addEventListener("click", closeThankYouModal);
   if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeThankYouModal);
 
-  // Close when clicking outside the modal box backdrop
+  // Stop audio if closed via backdrop click
   thankYouDialogue.addEventListener("click", (e) => {
     const rect = thankYouDialogue.getBoundingClientRect();
     if (
@@ -203,6 +206,11 @@ if (heroLogoLink && thankYouDialogue) {
     ) {
       closeThankYouModal();
     }
+  });
+
+  // Stop audio if closed via ESC key
+  thankYouDialogue.addEventListener("cancel", () => {
+    closeThankYouModal();
   });
 }
 
