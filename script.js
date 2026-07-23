@@ -233,5 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Website Designed & Developed by David Huddleston, with contributions from Dale E. Justice & Frank C. Mons.
-/**
- */
+// Copyright (c) 2026 State of Veterans. All Rights Reserved
+// Unauthorized copying, modification, or distribution is strictly prohibited.
+//
+
